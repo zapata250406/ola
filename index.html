@@ -60,7 +60,7 @@
             background-color: #3361d6;
             transform: scale(0.96);
         }
-        #contenedor-principal {
+        .contenedor-principal {
             background-color: rgba(255, 255, 255, 0.8);
             padding: 30px;
             border-radius: 30px;
@@ -74,6 +74,18 @@
             color: #1859c2;
             margin-top: 20px;
             line-height: 1.4;
+        }
+        .lista-razones {
+            text-align: left;
+            font-size: 18px;
+            color: #1859c2;
+            line-height: 1.6;
+            margin: 20px auto;
+            padding-left: 20px;
+            display: inline-block;
+        }
+        .lista-razones li {
+            margin-bottom: 12px;
         }
         .botones-opciones {
             display: flex;
@@ -99,11 +111,26 @@
     <div id="pantalla-inicial">
         <img src="https://media.tenor.com/XyGfJ5J9q_IAAAAj/mochi-peach-cat-pig.gif" alt="Cerdito esperando" class="cerdito-img flotar">
         <h1>Oye mi loka, tengo algo importante que decirte... 🐽</h1>
-        <button class="btn-principal" onclick="mostrarPregunta()">Picale aquí</button>
+        <button class="btn-principal" onclick="mostrarRazones()">Picale aquí</button>
+    </div>
+
+    <div id="pantalla-razones" class="oculto">
+        <div class="contenedor-principal">
+            <div class="texto-destacado">
+                <p>🐷✨<br><strong>Me gustas muchísimo por...</strong></p>
+                <ul class="lista-razones">
+                    <li>Tu forma de ser y tu sonrisa 🌟</li>
+                    <li>Lo mucho que te gustan los cerditos 🐽</li>
+                    <li>Lo feliz que me haces sentir ✨</li>
+                    <li>Eres la más hermosa ❤️</li>
+                </ul>
+            </div>
+            <button class="btn-principal" onclick="mostrarPregunta()">Siguiente</button>
+        </div>
     </div>
 
     <div id="pantalla-pregunta" class="oculto">
-        <div id="contenedor-principal">
+        <div class="contenedor-principal">
             <img src="https://media.tenor.com/P29030sQ32QAAAAi/milk-and-mocha-bear-couple.gif" alt="Cerditos amor" class="cerdito-img">
             <div class="texto-destacado">
                 <p>🐷✨<br><strong>Estem... como ayer te dije va, pues me gustas muchísimo</strong></p>
@@ -117,7 +144,7 @@
     </div>
 
     <div id="pantalla-exito" class="oculto">
-        <div id="contenedor-principal">
+        <div class="contenedor-principal">
             <img src="https://media.tenor.com/j42q-23qSroAAAAi/cute-pig.gif" alt="Cerdito feliz" class="cerdito-img flotar">
             <div class="texto-destacado">
                 <p>AAAAAAAAH OSTIA CHAVAL 🥰🐽</p>
@@ -127,8 +154,13 @@
     </div>
 
     <script>
-        function mostrarPregunta() {
+        function mostrarRazones() {
             document.getElementById('pantalla-inicial').classList.add('oculto');
+            document.getElementById('pantalla-razones').classList.remove('oculto');
+        }
+
+        function mostrarPregunta() {
+            document.getElementById('pantalla-razones').classList.add('oculto');
             document.getElementById('pantalla-pregunta').classList.remove('oculto');
         }
 
