@@ -75,18 +75,6 @@
             margin-top: 20px;
             line-height: 1.4;
         }
-        .lista-razones {
-            text-align: left;
-            font-size: 18px;
-            color: #1859c2;
-            line-height: 1.6;
-            margin: 20px auto;
-            padding-left: 20px;
-            display: inline-block;
-        }
-        .lista-razones li {
-            margin-bottom: 12px;
-        }
         .botones-opciones {
             display: flex;
             justify-content: center;
@@ -140,13 +128,8 @@
     </div>
 
     <script>
-        function mostrarRazones() {
-            document.getElementById('pantalla-inicial').classList.add('oculto');
-            document.getElementById('pantalla-razones').classList.remove('oculto');
-        }
-
         function mostrarPregunta() {
-            document.getElementById('pantalla-razones').classList.add('oculto');
+            document.getElementById('pantalla-inicial').classList.add('oculto');
             document.getElementById('pantalla-pregunta').classList.remove('oculto');
         }
 
