@@ -2,59 +2,113 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para ti</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Para ti 🐷</title>
     <style>
         body {
             margin: 0;
-            height: 100vh;
+            /* Asegura que ocupe toda la pantalla del cel y centra todo */
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-color: #ffe6e6;
-            font-family: Arial, sans-serif;
+            /* Un fondo degradado rosa suave */
+            background: linear-gradient(135deg, #fff5f8 0%, #ffdde1 100%);
+            font-family: 'Comic Sans MS', 'Arial Rounded MT Bold', Arial, sans-serif; /* Fuente un poco más juguetona */
             text-align: center;
-            padding: 20px;
+            padding: 25px;
+            box-sizing: border-box;
         }
         .oculto {
-            display: none;
+            display: none !important;
         }
+        
+        /* Estilos para las imágenes de cerditos */
+        .cerdito-img {
+            max-width: 80%; /* Que no sea muy ancha en cel */
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(255, 105, 180, 0.2);
+            margin-bottom: 25px;
+        }
+
+        /* Animación flotante para el primer cerdito */
+        .flotar {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0px); }
+        }
+
+        h1 {
+            color: #d63384; /* Rosa oscuro */
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+
         button {
-            padding: 15px 30px;
-            font-size: 18px;
-            background-color: #ff4d4d;
+            padding: 18px 40px;
+            font-size: 20px;
+            background-color: #ff69b4; /* Hot pink */
             color: white;
             border: none;
-            border-radius: 25px;
+            border-radius: 50px; /* Botón muy redondo */
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(214, 51, 132, 0.4);
+            transition: transform 0.1s, background-color 0.2s;
+            font-weight: bold;
         }
-        #mensaje {
-            font-size: 24px;
-            color: #d32f2f;
+        button:active {
+             background-color: #d63384;
+            transform: scale(0.96); /* Efecto de pulsación al tocar */
+        }
+
+        /* Contenedor del mensaje final */
+        #mensaje-final {
+            background-color: rgba(255, 255, 255, 0.8); /* Fondo semitransparente para leer mejor */
+            padding: 30px;
+            border-radius: 30px;
+            animation: aparecerSuave 1.2s ease-out;
+        }
+
+        #mensaje-texto {
+            font-size: 26px;
+            color: #c2185b;
             margin-top: 20px;
-            animation: fadeIn 2s;
+            line-height: 1.4;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        
+        @keyframes aparecerSuave {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
-    <h1 id="titulo">Tengo algo importante que decirte...</h1>
-    <button id="boton" onclick="revelar()">Toca aquí</button>
-    <div id="mensaje" class="oculto">
-        <p>Me gustas mucho.</p>
-        <p>¿Te gustaría salir conmigo?</p>
+
+    <div id="pantalla-inicial">
+        <img src="https://media.tenor.com/XyGfJ5J9q_IAAAAj/mochi-peach-cat-pig.gif" alt="Cerdito esperando" class="cerdito-img flotar">
+        <h1>Tengo algo importante (y tierno) que decirte... 🐽</h1>
+        <button onclick="revelar()">Toca aquí para ver</button>
+    </div>
+
+    <div id="mensaje-final" class="oculto">
+        <img src="https://media.tenor.com/P29030sQ32QAAAAi/milk-and-mocha-bear-couple.gif" alt="Cerditos felices" class="cerdito-img">
+        <div id="mensaje-texto">
+            <p>🐷✨<br><strong>Me gustas muchísimo.</strong></p>
+            <p style="font-size: 22px; margin-top: 30px;">¿Te gustaría salir conmigo? ❤️</p>
+        </div>
     </div>
 
     <script>
         function revelar() {
-            document.getElementById('boton').classList.add('oculto');
-            document.getElementById('titulo').classList.add('oculto');
-            document.getElementById('mensaje').classList.remove('oculto');
+            // Ocultamos toda la pantalla inicial
+            document.getElementById('pantalla-inicial').style.display = 'none';
+            // Mostramos el contenedor final quitando la clase 'oculto'
+            document.getElementById('mensaje-final').classList.remove('oculto');
         }
     </script>
 </body>
