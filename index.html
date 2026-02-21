@@ -7,33 +7,28 @@
     <style>
         body {
             margin: 0;
-            /* Asegura que ocupe toda la pantalla del cel y centra todo */
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            /* Un fondo degradado rosa suave */
             background: linear-gradient(135deg, #fff5f8 0%, #ffdde1 100%);
-            font-family: 'Comic Sans MS', 'Arial Rounded MT Bold', Arial, sans-serif; /* Fuente un poco más juguetona */
+            font-family: 'Comic Sans MS', 'Arial Rounded MT Bold', Arial, sans-serif;
             text-align: center;
             padding: 25px;
             box-sizing: border-box;
+            overflow: hidden;
         }
         .oculto {
             display: none !important;
         }
-        
-        /* Estilos para las imágenes de cerditos */
         .cerdito-img {
-            max-width: 80%; /* Que no sea muy ancha en cel */
+            max-width: 80%;
             height: auto;
             border-radius: 20px;
             box-shadow: 0 8px 16px rgba(255, 105, 180, 0.2);
             margin-bottom: 25px;
         }
-
-        /* Animación flotante para el primer cerdito */
         .flotar {
             animation: float 3s ease-in-out infinite;
         }
@@ -42,45 +37,57 @@
             50% { transform: translateY(-12px); }
             100% { transform: translateY(0px); }
         }
-
         h1 {
-            color: #d63384; /* Rosa oscuro */
+            color: #d63384;
             margin-bottom: 30px;
             font-size: 28px;
         }
-
-        button {
+        .btn-principal {
             padding: 18px 40px;
             font-size: 20px;
-            background-color: #ff69b4; /* Hot pink */
+            background-color: #ff69b4;
             color: white;
             border: none;
-            border-radius: 50px; /* Botón muy redondo */
+            border-radius: 50px;
             cursor: pointer;
             box-shadow: 0 4px 10px rgba(214, 51, 132, 0.4);
             transition: transform 0.1s, background-color 0.2s;
             font-weight: bold;
+            margin: 10px;
+            z-index: 10;
         }
-        button:active {
-             background-color: #d63384;
-            transform: scale(0.96); /* Efecto de pulsación al tocar */
+        .btn-principal:active {
+            background-color: #d63384;
+            transform: scale(0.96);
         }
-
-        /* Contenedor del mensaje final */
-        #mensaje-final {
-            background-color: rgba(255, 255, 255, 0.8); /* Fondo semitransparente para leer mejor */
+        #contenedor-principal {
+            background-color: rgba(255, 255, 255, 0.8);
             padding: 30px;
             border-radius: 30px;
             animation: aparecerSuave 1.2s ease-out;
+            width: 100%;
+            max-width: 400px;
+            position: relative;
         }
-
-        #mensaje-texto {
+        .texto-destacado {
             font-size: 26px;
             color: #c2185b;
             margin-top: 20px;
             line-height: 1.4;
         }
-        
+        .botones-opciones {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 30px;
+            min-height: 60px;
+        }
+        #btn-no {
+            background-color: #6c757d;
+            box-shadow: 0 4px 10px rgba(108, 117, 125, 0.4);
+            transition: left 0.3s ease, top 0.3s ease;
+        }
         @keyframes aparecerSuave {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -92,24 +99,63 @@
     <div id="pantalla-inicial">
         <img src="https://media.tenor.com/XyGfJ5J9q_IAAAAj/mochi-peach-cat-pig.gif" alt="Cerdito esperando" class="cerdito-img flotar">
         <h1>Tengo algo importante (y tierno) que decirte... 🐽</h1>
-        <button onclick="revelar()">Toca aquí para ver</button>
+        <button class="btn-principal" onclick="mostrarPregunta()">Toca aquí</button>
     </div>
 
-    <div id="mensaje-final" class="oculto">
-        <img src="https://media.tenor.com/P29030sQ32QAAAAi/milk-and-mocha-bear-couple.gif" alt="Cerditos felices" class="cerdito-img">
-        <div id="mensaje-texto">
-            <p>🐷✨<br><strong>Me gustas muchísimo.</strong></p>
-            <p style="font-size: 22px; margin-top: 30px;">¿Te gustaría salir conmigo? ❤️</p>
+    <div id="pantalla-pregunta" class="oculto">
+        <div id="contenedor-principal">
+            <img src="https://media.tenor.com/P29030sQ32QAAAAi/milk-and-mocha-bear-couple.gif" alt="Cerditos amor" class="cerdito-img">
+            <div class="texto-destacado">
+                <p>🐷✨<br><strong>Me gustas muchísimo.</strong></p>
+                <p style="font-size: 22px;">¿Te gustaría salir conmigo? ❤️</p>
+            </div>
+            <div class="botones-opciones">
+                <button class="btn-principal" id="btn-si" onclick="celebrar()">¡Sí!</button>
+                <button class="btn-principal" id="btn-no">No</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="pantalla-exito" class="oculto">
+        <div id="contenedor-principal">
+            <img src="https://media.tenor.com/j42q-23qSroAAAAi/cute-pig.gif" alt="Cerdito feliz" class="cerdito-img flotar">
+            <div class="texto-destacado">
+                <p>¡Sabía que dirías que sí! 🥰🐽</p>
+                <p style="font-size: 20px;">Nos vemos pronto.</p>
+            </div>
         </div>
     </div>
 
     <script>
-        function revelar() {
-            // Ocultamos toda la pantalla inicial
-            document.getElementById('pantalla-inicial').style.display = 'none';
-            // Mostramos el contenedor final quitando la clase 'oculto'
-            document.getElementById('mensaje-final').classList.remove('oculto');
+        function mostrarPregunta() {
+            document.getElementById('pantalla-inicial').classList.add('oculto');
+            document.getElementById('pantalla-pregunta').classList.remove('oculto');
         }
+
+        function celebrar() {
+            document.getElementById('pantalla-pregunta').classList.add('oculto');
+            document.getElementById('pantalla-exito').classList.remove('oculto');
+        }
+
+        const btnNo = document.getElementById('btn-no');
+
+        function moverBoton(e) {
+            if (e) e.preventDefault();
+            
+            btnNo.style.position = 'fixed';
+            
+            const maxX = window.innerWidth - btnNo.offsetWidth - 20;
+            const maxY = window.innerHeight - btnNo.offsetHeight - 20;
+            
+            const randomX = Math.max(20, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(20, Math.floor(Math.random() * maxY));
+            
+            btnNo.style.left = randomX + 'px';
+            btnNo.style.top = randomY + 'px';
+        }
+
+        btnNo.addEventListener('mouseover', moverBoton);
+        btnNo.addEventListener('touchstart', moverBoton);
     </script>
 </body>
 </html>
